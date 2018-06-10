@@ -1,6 +1,5 @@
 <!--pages/login/login.wxml-->
 
-
     <label class="lables">用户名/邮箱/手机号</label>
     <input class="inputs"  bindinput="accountInput" />  
 
@@ -11,7 +10,7 @@
 
 
 
-      <button class="loginBtn" type="primary"  disabled="{{disabled}}" bindtap="login">登录</button>  
+      <button class="loginBtn" bindgetuserinfo="getToken">登录</button>  
       <view class="center">
       <label class="loginLab">IAM用户登录</label>
       </view>
