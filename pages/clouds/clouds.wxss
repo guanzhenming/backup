@@ -1,0 +1,28 @@
+/* pages/clouds/clouds.wxss */
+.buttons{
+  width: 309px;
+  height: 97px;
+  
+  margin-bottom: 16px;
+  border-radius: 4px;
+  background: #FFFFFF;
+}
+.able{
+  padding-top: 20px;
+  box-shadow: 1px 1px 1px 1px #999999;
+}
+.disable{
+  padding-top: 25px;
+}
+.backupgroudsHW{
+  width: 195px;
+  height: 46px;
+}
+.backupgrouds{
+  width: 120px;
+  height: 40px;
+}
+.backupgrouds-aws{
+  width: 70px;
+  height: 40px;
+}

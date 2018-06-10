@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/clouds/clouds",
     "pages/login/login",
     "pages/ecs/ecs",
     "pages/backup/backup",

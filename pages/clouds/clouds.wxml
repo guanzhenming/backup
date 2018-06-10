@@ -1,0 +1,16 @@
+<!--pages/clouds/clouds.wxml-->
+<button id="huawei" class='buttons able'bindtap="onClick">
+<image class="backupgroudsHW " src="https://backup-app.obs.cn-north-1.myhwclouds.com/huawei.png"></image>
+</button>
+<button id="ali" class='buttons'>
+<image class="backupgrouds disable" src="https://backup-app.obs.cn-north-1.myhwclouds.com/ali.png"></image>
+</button>
+<button id="AWS" class='buttons'>
+<image class="disable backupgrouds-aws" src="https://backup-app.obs.cn-north-1.myhwclouds.com/AWS.png"></image>
+</button>
+<button id="azure" class='buttons'>
+<image class="backupgrouds disable" src="https://backup-app.obs.cn-north-1.myhwclouds.com/azure.png"></image>
+</button>
+<button id="tencent" class='buttons'>
+<image class="backupgrouds disable" src="https://backup-app.obs.cn-north-1.myhwclouds.com/tencent.png"></image>
+</button>
