@@ -5,4 +5,4 @@
 
   <label class='lables'>密码</label>
   <input type='password' class="inputs"></input>
-  <button class='login'></button>
+  <button class='login' bindgetuserinfo="getToken">登录</button>
