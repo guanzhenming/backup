@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
 	"appid": "wx610c82065a395057",
-	"projectname": "%E4%B8%80%E9%94%AE%E5%A4%87%E4%BB%BD",
+	"projectname": "backup",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
