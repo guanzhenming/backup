@@ -1,8 +1,18 @@
 <!--pages/login/login.wxml-->
 
-  <label class='lables'>用户名/邮箱/手机号码</label>
-  <input type='text' class="inputs"></input>
 
-  <label class='lables'>密码</label>
-  <input type='password' class="inputs"></input>
-  <button class='login'></button>
+    <label class="lables">用户名/邮箱/手机号</label>
+    <input class="inputs"  bindinput="accountInput" />  
+
+
+
+      <label class="lables">密码</label>  
+      <input class="inputs" password="true" bindinput="passwordInput" />  
+
+
+
+      <button class="loginBtn" type="primary"  disabled="{{disabled}}" bindtap="login">登录</button>  
+      <view class="center">
+      <label class="loginLab">IAM用户登录</label>
+      </view>
+
