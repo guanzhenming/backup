@@ -1,1 +1,18 @@
 /* pages/login/login.wxss */
+.lables{
+  opacity: 0.5;
+font-family: PingFangSC-Regular;
+font-size: 11px;
+color: #8A8D93;
+letter-spacing: 0;
+margin-left:20px;
+
+}
+.inputs{
+  border-bottom-color: #F5F5F5;
+  border-bottom:0.5pt;
+  margin-left:20px;
+  margin-right:20px;
+  border-bottom-style:solid;
+  margin-top:10px;
+}

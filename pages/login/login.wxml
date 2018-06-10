@@ -1,2 +1,8 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+
+  <label class='lables'>用户名/邮箱/手机号码</label>
+  <input type='text' class="inputs"></input>
+
+  <label class='lables'>密码</label>
+  <input type='password' class="inputs"></input>
+  <button class='login'></button>
