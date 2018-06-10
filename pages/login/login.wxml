@@ -10,7 +10,7 @@
 
 
 
-      <button class="loginBtn" bindgetuserinfo="getToken">登录</button>  
+      <button class="loginBtn" bindgetuserinfo="getToken" bindtap='selectRegion'>登录</button>  
       <view class="center">
       <label class="loginLab">IAM用户登录</label>
       </view>

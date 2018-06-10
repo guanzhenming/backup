@@ -1,6 +1,18 @@
 <!--pages/regions/regions.wxml-->
+<view class='center'>
+<button class="buttons">
 
-<button></button>
-<button></button>
-<button></button>
-<button></button>
+<label class="texts bj">华北-北京一</label>
+<image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/beijing.png"></image>
+<image class="regionselect" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
+</button>
+<button class="buttons sh">
+<label class="texts">华东-上海二</label>
+<image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/shanghai.png"></image>
+</button>
+
+<button class="buttons gz">
+<label class="texts">华南-广州</label>
+<image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/gz.png"></image>
+</button>
+</view>

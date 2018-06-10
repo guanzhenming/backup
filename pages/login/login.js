@@ -1,6 +1,15 @@
 // pages/login/login.js
 Page({
 
+  selectRegion: function () {
+    wx.navigateTo({
+      url: '../regions/regions',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+
+  },
   /**
    * 页面的初始数据
    */
