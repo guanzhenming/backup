@@ -1,12 +1,11 @@
 // pages/ecs/ecs.js
 Page({
-
+  data: {
+    region_desc: '华北-北京1'
+  },
   /**
    * 页面的初始数据
    */
-  data: {
-  
-  },
 
   /**
    * 生命周期函数--监听页面加载

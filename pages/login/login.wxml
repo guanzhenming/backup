@@ -1,2 +1,22 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<view class="container">  
+ <view class="login-from">  
+  <view class="inputView">
+    <label class="loginLab">用户名/邮箱/手机号</label>
+    <input class="inputText"  bindinput="accountInput" />  
+  </view>
+
+<!--密码-->  
+    <view class="inputView">  
+      <label class="loginLab">密码</label>  
+      <input class="inputText" password="true" bindinput="passwordInput" />  
+    </view>  
+
+    <!--按钮-->  
+    <view class="loginBtnView">  
+      <button class="loginBtn" type="primary"  disabled="{{disabled}}" bindtap="login">登录</button>  
+      <label class="loginLab">IAM用户登录</label>
+    </view>  
+
+   </view>  
+</view> 

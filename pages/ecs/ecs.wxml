@@ -1,2 +1,4 @@
 <!--pages/ecs/ecs.wxml-->
-<text>pages/ecs/ecs.wxml</text>
+<view class="container">
+<navigator url="../regon/region">{{region_desc}}</navigator>
+</view>
