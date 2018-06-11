@@ -1,4 +1,21 @@
 <!--pages/ecs/ecs.wxml-->
-<view class="container">
+<view class="navi">
+<image class="location" src="https://backup-app.obs.cn-north-1.myhwclouds.com/location.png"></image>
+<label class='region'>华北-北京一</label>
+</view>
+<view class="op">
+<checkbox class="checkboxes" ></checkbox><label class="names">全选  共计： 3台</label>
+<button class='backup'>一键备份</button>
+</view>
 
+<block class="tables" wx:for="{{listECS}}" wx:key="{{code}}">  
+<view class="blocks">
+<checkbox class="checkboxes" value="{{item.name}}" ></checkbox><label class="names">{{item.name}}</label>
+<view class='infos'>{{item.diskSize}}   {{item.ip}}</view>
+</view>
+</block>  
+
+<view class="switch">
+<label class='region'>我的云服务器</label>
+<label class='region'>我的备份</label>
 </view>

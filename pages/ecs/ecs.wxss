@@ -1,1 +1,85 @@
 /* pages/ecs/ecs.wxss */
+.blocks{
+  height: 30pt;
+  width: 100%;
+  padding-top: 10pt;
+  padding-bottom: 10pt;
+  padding-left: 10pt;
+  border: 0.5px solid #F5F5F5;
+    background:#FFFFFF;
+}
+.checkboxes{
+  height: 20pt;
+  width: 20pt;
+}
+.names{
+  font-family: PingFangSC-Regular;
+font-size: 16px;
+color: #34475F;
+letter-spacing: 0;
+margin-left: 10px;
+}
+.infos{
+font-family: PingFangSC-Regular;
+font-size: 14px;
+color: #8A8D93;
+letter-spacing: 0;
+margin-left: 36px;
+}
+.navi{
+  height: 20pt;
+  width: 100%;
+  padding-top: 5pt;
+  padding-bottom: 5pt;
+  padding-left: 13pt;
+  border: 0.5px solid #F5F5F5;
+  background:#FFFFFF;
+}
+.location{
+  width: 11.5pt;
+  height: 14pt;
+}
+.region{
+  height: 30pt;
+  margin-left: 14px;
+     font-family: PingFangSC-Regular;
+font-size: 12px;
+color: #22263F;
+text-align: center;
+}
+.op{
+  height: 30pt;
+  width: 100%;
+  padding-top: 10pt;
+  padding-bottom: 10pt;
+  padding-left: 10pt;
+  background:#FFFFFF;
+  margin-bottom: 10pt;
+}
+.names{
+  font-family: PingFangSC-Regular;
+font-size: 14px;
+color: #34475F;
+letter-spacing: 0;
+}
+.backup{
+  width: 86px;
+  height: 30pt;
+  margin-right: 30px;
+background: rgba(245,111,105,0.60);
+border-radius: 100px;
+float: right;
+font-size: 14px;
+font-family: PingFangSC-Regular;
+color: #FFFFFF;
+text-align: center;
+}
+.switch{
+  position: absolute;
+  bottom: 0;
+  widows: 100%;
+  height: 50px;
+  background:#FFFFFF;
+  border: 0.5px solid #F5F5F5;
+  z-index: 1;
+}

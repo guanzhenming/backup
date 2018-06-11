@@ -1,9 +1,9 @@
 <!--pages/regions/regions.wxml-->
 <view class='center'>
-<button class="buttons">
+<button class="buttons" bindtap='toEcs'>
 
 <label class="texts bj">华北-北京一</label>
-<image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/beijing.png"></image>
+<image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/beijing.png" ></image>
 <image class="regionselect" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
 </button>
 <button class="buttons sh">

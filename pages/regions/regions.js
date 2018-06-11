@@ -1,6 +1,14 @@
 // pages/regions/regions.js
 Page({
+  toEcs: function () {
+    wx.navigateTo({
+      url: '../ecs/ecs',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
 
+  },
   /**
    * 页面的初始数据
    */
