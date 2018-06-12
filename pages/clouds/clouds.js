@@ -1,6 +1,6 @@
 // pages/clouds/clouds.js
 Page({
-  onClick:function(){
+  onClickHuawei:function(){
     wx.navigateTo({
       url: '../login/login',
       success: function(res) {},

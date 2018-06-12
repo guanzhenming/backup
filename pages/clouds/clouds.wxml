@@ -1,5 +1,5 @@
 <!--pages/clouds/clouds.wxml-->
-<button id="huawei" class='buttons able'bindtap="onClick">
+<button id="huawei" class='buttons able'bindtap="onClickHuawei">
 <image class="backupgroudsHW " src="https://backup-app.obs.cn-north-1.myhwclouds.com/huawei.png"></image>
 </button>
 <button id="ali" class='buttons'>
