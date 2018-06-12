@@ -1,21 +1,61 @@
 <!--pages/ecs/ecs.wxml-->
 <view class="navi">
-<image class="location" src="https://backup-app.obs.cn-north-1.myhwclouds.com/location.png"></image>
-<label class='region'>华北-北京一</label>
+  <image class="location" src="https://backup-app.obs.cn-north-1.myhwclouds.com/location.png"></image>
+  <label class='region'>华北-北京一</label>
 </view>
-<view class="op">
-<checkbox class="checkboxes" ></checkbox><label class="names">全选  共计： 3台</label>
-<button class='backup'>一键备份</button>
+<view wx:if="{{ecsselected}}">
+  <view class="op">
+    <checkbox class="checkboxes"></checkbox>
+    <label class="names">全选 共计： 3台</label>
+    <button class='backup'>一键备份</button>
+  </view>
+
+  <block class="tables" wx:for="{{listECS}}" wx:key="{{code}}">
+    <view class="blocks">
+      <checkbox class="checkboxes" value="{{item.name}}"></checkbox>
+      <label class="names">{{item.name}}</label>
+      <view class='infos'>{{item.diskSize}} {{item.ip}}</view>
+    </view>
+  </block>
 </view>
 
-<block class="tables" wx:for="{{listECS}}" wx:key="{{code}}">  
-<view class="blocks">
-<checkbox class="checkboxes" value="{{item.name}}" ></checkbox><label class="names">{{item.name}}</label>
-<view class='infos'>{{item.diskSize}}   {{item.ip}}</view>
-</view>
-</block>  
 
-<view class="switch">
-<label class='region'>我的云服务器</label>
-<label class='region'>我的备份</label>
+<view wx:if="{{ecsselected!=true}}">
+  <block class="tables" wx:for="{{listWorking}}" wx:key="{{code}}">
+    <view class="blocks working">
+      <image class="status" src="https://backup-app.obs.cn-north-1.myhwclouds.com/{{item.p==-1?'fail.png':'progress.png'}}"></image>
+      <label class="names b">{{item.name}}</label>
+      <view class='infos'>{{item.ecs}}/{{item.time}}</view>
+      <progress class="names b p" wx:if="{{item.p!=-1}}" percent="{{item.p}}" stroke-width="12" show-info="true" active="true"></progress>
+      <label class="names b p f" wx:if="{{item.p==-1}}">备份失败</label>
+    </view>
+  </block>
+  <view class="sep">
+  </view>
+
+  <block class="tables" wx:for="{{listBackups}}" wx:key="{{code}}">
+    <view class="blocks">
+      <image class="status" src="https://backup-app.obs.cn-north-1.myhwclouds.com/success.png"></image>
+      <label class="names b">{{item.name}}</label>
+      <view class='infos'>{{item.ecs}}/{{item.time}}</view>
+    </view>
+  </block>
+</view>
+
+<view class="switch left" bindtap='onECS'>
+  <view>
+    <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/{{ecsselected ? 'ecsselect' : 'ecs'}}.png"></image>
+  </view>
+
+  <p class="tabs {{ecsselected ? 'selected':'unselected'}}">我的云服务器</p>
+
+
+</view>
+<view class="switch right" bindtap='onBackup'>
+  <view>
+    <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/{{ecsselected ? 'backup':'backupselected'}}.png"></image>
+  </view>
+
+  <p class="tabs {{ecsselected ? 'unselected':'selected'}}">我的备份</p>
+
 </view>

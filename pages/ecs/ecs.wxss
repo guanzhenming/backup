@@ -6,11 +6,15 @@
   padding-bottom: 10pt;
   padding-left: 10pt;
   border: 0.5px solid #F5F5F5;
-    background:#FFFFFF;
+  background:#FFFFFF;
 }
 .checkboxes{
   height: 20pt;
   width: 20pt;
+}
+.status{
+  height: 15pt;
+  width: 15pt;
 }
 .names{
   font-family: PingFangSC-Regular;
@@ -76,10 +80,53 @@ text-align: center;
 }
 .switch{
   position: absolute;
+  display: inline-block;
   bottom: 0;
-  widows: 100%;
+  width: 50%;
   height: 50px;
   background:#FFFFFF;
-  border: 0.5px solid #F5F5F5;
   z-index: 1;
+  text-align: center;
+  border-top: 0.5px solid #D9D9D9;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.left{
+  left: 0px;
+}
+.right{
+  right: 0px;
+}
+.tabs{
+  background: #FFFFFF;
+  height:100%;
+  border-radius: 0px;
+  font-family: PingFangSC-Regular;
+  font-size: 13px;
+}
+.images{
+  width: 36px;
+  height: 27px;
+}
+.selected{
+  color: #F66E6A;
+}
+.unselected{
+  color: #34475F;
+}
+.sep{
+  margin-bottom: 10pt;
+}
+.b{
+  font-size: 16px;
+}
+.working{
+  height:60px;
+}
+.p{
+  margin-left: 30px;
+  width: 300px;
+}
+.f{
+  color: #F56F69;
 }

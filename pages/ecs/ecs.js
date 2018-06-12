@@ -25,16 +25,73 @@ const ECS=[
     diskSize: "120GB",
     ip: "192.168.0.145"
   }
-]
+];
+const listWorking = [
+  {
+    name: "Backup1",
+    ecs: "ECS1",
+    time: "2018-6-7 08:20",
+    p:-1
+  },
+  {
+    name: "Backup2",
+    ecs: "ECS2",
+    time: "2018-6-7 08:20",
+    p:0
+  },
+  {
+    name: "Backup3",
+    ecs: "ECS3",
+    time: "2018-6-7 08:20",
+    p:30
+  }
+];
+
+
+const listBackups = [
+  {
+    name: "Backup1",
+    ecs: "ECS1",
+    time: "2018-6-7 08:20",
+    p: 100
+  },
+  {
+    name: "Backup2",
+    ecs: "ECS2",
+    time: "2018-6-7 08:20",
+    p: 100
+  },
+  {
+    name: "Backup3",
+    ecs: "ECS3",
+    time: "2018-6-7 08:20",
+    p: 100
+  }
+];
 
 Page({
+  onECS:function(){
+    this.setData({
+      ecsselected : true
+    })
+    
+  },
+  onBackup: function () {
+    this.setData({
+      ecsselected: false
+    })
+  },
 
 
   /**
    * 页面的初始数据
    */
   data: {
-    listECS:ECS
+    listECS:ECS,
+    ecsselected:true,
+    listWorking: listWorking,
+    listBackups: listBackups
+
   },
 
   /**
