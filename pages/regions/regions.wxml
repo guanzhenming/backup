@@ -1,18 +1,20 @@
 <!--pages/regions/regions.wxml-->
 <view class='center'>
-<button class="buttons" bindtap='toEcs'>
+<button class="buttons" bindtap='onClickHuabei'>
 
 <label class="texts bj">华北-北京一</label>
 <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/beijing.png" ></image>
-<image class="regionselect" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
+<image class="regionselect" wx:if="{{true}}" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
 </button>
-<button class="buttons sh">
+<button class="buttons sh" bindtap='onClickHuadong'>
 <label class="texts">华东-上海二</label>
 <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/shanghai.png"></image>
+<image class="regionselect" wx:if="{{false}}" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
 </button>
 
-<button class="buttons gz">
+<button class="buttons gz" bindtap='onClickHuanan'>
 <label class="texts">华南-广州</label>
 <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/gz.png"></image>
+<image class="regionselect" wx:if="{{false}}" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
 </button>
 </view>
