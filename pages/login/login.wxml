@@ -4,7 +4,7 @@
     <input id="user" class="inputs"  name="accountInput" />  
 
       <label class="lables">密码</label>  
-      <input id="pw" class="inputs" password="true" type="text" name="passwordInput" bindinput=''/>  
+      <input id="pw" class="inputs" password="true" type='text' name="passwordInput" bindinput=''/>  
 
       <button class="loginBtn" form-type='submit'>登录</button>  
       </form>

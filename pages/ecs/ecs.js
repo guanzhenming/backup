@@ -1,21 +1,22 @@
 // pages/ecs/ecs.js
 
 Page({
-  onClickAction: function() {
+  onClickAction: function(e) {
     var ifActionAll = this.data.actionAll;
     var listEcs = [];
     if (ifActionAll == true) {
-      console.long('backup all ecs!');
+      console.log('backup all ecs!');
       listEcs = this.data.listECS;
     } else {
       console.log('backup backup single ecs!');
       for (var i=0;i<this.data.listAction.length;i++) {
         for (var j=0;j<this.data.listECS.length;j++) {
           if (this.data.listAction[i].name == this.data.listECS[j].name) {
-            listEcs.push(this.data.listES[j])
+            listEcs.push(this.data.listECS[j])
           }
         }
       }
+    }
       console.log('backup ecs list is:'+JSON.stringify(listEcs));
       var regionId = wx.getStorageSync('region_id');
       var token = wx.getStorageSync(regionId+'-token');
@@ -38,7 +39,7 @@ Page({
         })
       }
 
-    }
+    
   },
   onActionSingle: function(e) {
     console.log(e)
@@ -92,16 +93,15 @@ Page({
         "X-Auth-Token": token
       },
       method: "GET",
-      data: JSON.stringify({ protect: {} }),
       complete: function (res) {
         console.log('backup  list is:' + JSON.stringify(res))
         if (res.statusCode == 200) {
-          var buckupNum = res.data.checkpoint_items.length;
+          var backupNum = res.data.checkpoint_items.length;
           var listBackup=[];
           var listWorking=[];
           for (var i=0;i<backupNum;i++) {
-            var day = res.data.checkpoint_items[i].created_at.split['T'][0];
-            var hour = res.data.checkpoint_items[i].created_at.split['T'][1].split('.')
+            var day = res.data.checkpoint_items[i].created_at.split('T')[0];
+            var hour = res.data.checkpoint_items[i].created_at.split('T')[1].split('.')
             var h1 = hour.split(':')[0]
             var min = hour.split(':')[1]
             var sec = hour.split(':')[2]
@@ -113,7 +113,7 @@ Page({
               time: time,
               p: res.data.checkpoint_items[i].extend_info.progress
             }
-            if (p == 100) {
+            if (back.p == 100) {
               listBackup.push(back)
             } else {
               listWorking.push(back)
@@ -124,12 +124,12 @@ Page({
           this.setData({
             listBackups: listBackup,
             listWorking: listWorking,
-            currentBackupNum: buckupNum
+            currentBackupNum: backupNum
           })
         }
       }
     })
-    this.setData({
+    that.setData({
       ecsselected: false
     })
   },
@@ -139,10 +139,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listECS:ECS,
+    listECS:[],
     ecsselected:true,
-    listWorking: listWorking,
-    listBackups: listBackups,
+    listWorking: [],
+    listBackups: [],
     currentEcsNum: 0,
     currentBackupNum: 0,
     actionAll: false,
@@ -175,7 +175,7 @@ Page({
     this.setData({
       region_name: region_name
     })
-    var getEcs_url  = "https://ecs." + regionId + ".myhwclouds.com/" + "v1/" + projId + "/servers/detail?limit=5";
+    var getEcs_url  = "https://ecs." + regionId + ".myhwclouds.com/" + "v2/" + projId + "/servers/detail?limit=5";
     var that = this;
     wx.request({
       url: getEcs_url,
@@ -184,7 +184,6 @@ Page({
         "X-Auth-Token": token
       },
       method: "GET",
-      data: JSON.stringify({ protect: {} }),
       complete: function (res) {
         console.log('ecs  list is:' + JSON.stringify(res))
         if (res.statusCode == 200) {
@@ -197,7 +196,7 @@ Page({
             ecsIp = _.first(_.first(_.values(res.data.addresses))) && _.first(_.first(_.values(res.data.addresses))).addr || '--';
             }
             if (res.data["addresses"] && res.data["addresses"][vpcId] && res.data["addresses"][vpcId].length) {
-              ecsIp = res.data["addresses"][vpcId][0]["addr"]''
+              ecsIp = res.data["addresses"][vpcId][0]["addr"]
             }
             var ecs = {
               name: res.data.servers[i].name,

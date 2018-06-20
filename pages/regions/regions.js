@@ -36,6 +36,7 @@ Page({
   onClickHuadong: function () {
     wx.setStorageSync('region_id', 'cn-east-2')
     wx.setStorageSync('region_name', '华东-上海2')
+    var token = wx.getStorageSync('cn-east-2-token')
     if (token) {
       this.gotoEcs()
     } else {
@@ -48,9 +49,11 @@ Page({
     }
 
   },
-  onClickHuabei: function () {
+  onClickHuanan: function () {
     wx.setStorageSync('region_id', 'cn-south-1')
     wx.setStorageSync('region_name', '华南-广州')
+    var token = wx.getStorageSync('cn-south-1-token')
+    var token = wx.getStorageSync('cn-north-1-token')
     if (token) {
       this.gotoEcs()
     } else {
@@ -58,7 +61,7 @@ Page({
       if (globalToken) {
         login.getProjIdByToken(globalToken)
       } else {
-        thisl.gotoLogin()
+        this.gotoLogin()
       }
     }
 
@@ -67,7 +70,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    region_id: ''
+
   },
 
   /**
@@ -75,7 +78,7 @@ Page({
    */
   onLoad: function (options) {
     var regionId=wx.getStorageSync('region_id')
-    if (region_id) {
+    if (regionId) {
       this.setData({
         region_id: regionId
       })

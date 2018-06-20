@@ -1,10 +1,10 @@
 // pages/login/login.js
 Page({
   getProjId: function (userInfo) {
-    var region_id = wx.getStorageSync('region_id')
+    var regionId = wx.getStorageSync('region_id')
     wx.setStorageSync('userInfo', userInfo)
     //支持其他厂商是要从缓存读取url
-    var url = "https://iam."+region_id+".myhwclouds.com/v3/auth/tokens";
+    var url = "https://iam." + regionId+".myhwclouds.com/v3/auth/tokens";
     var bodyData = {
       auth: {
         identity: {
@@ -50,21 +50,22 @@ Page({
 
           })
         } else {
-          var token = JSON.stringify(res.header["X-Subject-Token"]).replace(/\"/g,"");
+          var token = JSON.stringify(res.header['X-Subject-Token']).replace(/\"/g,"");
           wx.setStorageSync('global-token',token)
           var userId = res.data.token.user.id
           wx.setStorageSync('user-id',userId)
-          wx.setStorageSync('auth-info',bodydata)
+          wx.setStorageSync('auth-info',bodyData)
           var getProId_url = "https://iam." + region_id + ".myhwclouds.com/v3/users/"+userId+"/projects";
           wx.request({
-            url: url,
+            url: getProId_url,
             header: {
-              "Content-Type": "application/json;charset=utf8"
+              "Content-Type": "application/json;charset=utf8",
+              "X-Auth-Token": token
             },
             method: 'GET',
             data: JSON.stringify(bodyData),
             complete: function (res) {
-              if (res.statusCode != 201) {
+              if (res.statusCode != 200) {
                 wx.showModal({
                   title: '提示',
                   content: '获取项目信息失败',
@@ -80,9 +81,9 @@ Page({
                 var projId
                 regionId = wx.getStorageSync('region_id')
                 for(var i=0;i<res.data.projects.length;i++) {
-                  if (res.data.projects[i].name == region_id) {
+                  if (res.data.projects[i].name == regionId) {
                     projId = res.data.projects[i].id
-                    wx.setStorageSync(region_id+'projId',projId)
+                    wx.setStorageSync(regionId+'projId',projId)
                   }
                 }
                 var newBodyData = {
@@ -95,7 +96,7 @@ Page({
                     }
                   }
                 }
-                var url = "https://iam." + region_id + ".myhwclouds.com/v3/auth/tokens";
+                var url = "https://iam." + regionId + ".myhwclouds.com/v3/auth/tokens";
                 wx.request({
                   url: url,
                   header: {
@@ -117,9 +118,9 @@ Page({
 
                       })
                     } else {
-                      var token = JSON.stringify(res.header["X-Subject-Token"]).replace(/\"/g, "");
+                      var token = JSON.stringify(res.header['X-Subject-Token']).replace(/\"/g, "");
                       var regionId = wx.getStorageSync('region_id')
-                      wx.setStorageSync(region_id+'-token',token)
+                      wx.setStorageSync(regionId+'-token',token)
                       wx.navigateTo({
                         url: '../ecs/ecs',
                         success: function(res) {},
@@ -143,14 +144,14 @@ Page({
     var key = regionId + '-token'
     var token = wx.getStorageSync(key)
     if (token) {
-      console.log('already has token ,use it') {
+      console.log('already has token ,use it') 
         wx.navigateTo({
           url: '../ecs/ecs',
           success: function (res) { },
           fail: function (res) { },
           complete: function (res) { }
         })
-      }
+      
     } else {
       this.getProjId(e);
     }
@@ -239,14 +240,13 @@ function getProjIdByToken(token) {
   var regionId = wx.getStorageSync('region_id')
   var getProId_url = "https://iam." + regionId + ".myhwclouds.com/v3/users/" + userId + "/projects";
   wx.request({
-    url: url,
+    url: getProId_url,
     header: {
       "Content-Type": "application/json;charset=utf8"
     },
     method: 'GET',
-    data: JSON.stringify(bodyData),
     complete: function (res) {
-      if (res.statusCode != 201) {
+      if (res.statusCode != 200) {
         wx.showModal({
           title: '提示',
           content: '获取项目信息失败',
@@ -262,9 +262,9 @@ function getProjIdByToken(token) {
         var projId
         regionId = wx.getStorageSync('region_id')
         for (var i = 0; i < res.data.projects.length; i++) {
-          if (res.data.projects[i].name == region_id) {
+          if (res.data.projects[i].name == regionId) {
             projId = res.data.projects[i].id
-            wx.setStorageSync(region_id + 'projId', projId)
+            wx.setStorageSync(regionId + 'projId', projId)
           }
         }
         var bodyData = wx.getStorageSync('auth-info')
@@ -278,7 +278,7 @@ function getProjIdByToken(token) {
             }
           }
         }
-        var url = "https://iam." + region_id + ".myhwclouds.com/v3/auth/tokens";
+        var url = "https://iam." + regionId + ".myhwclouds.com/v3/auth/tokens";
         wx.request({
           url: url,
           header: {
@@ -295,12 +295,18 @@ function getProjIdByToken(token) {
                 success: function (res) {
                   if (res.confirm) {
                     console.log('用户点击确定')
+                    wx.navigateTo({
+                      url: '../login/login',
+                      success: function (res) { },
+                      fail: function (res) { },
+                      complete: function (res) { }
+                    })
                   }
                 }
 
               })
             } else {
-              var token = JSON.stringify(res.header["X-Subject-Token"]).replace(/\"/g, "");
+              var token = JSON.stringify(res.header['X-Subject-Token']).replace(/\"/g, "");
               var regionId = wx.getStorageSync('region_id')
               wx.setStorageSync(region_id + '-token', token)
               wx.navigateTo({
