@@ -2,7 +2,7 @@
 Page({
   onClickHuawei:function(){
     wx.navigateTo({
-      url: '../login/login',
+      url: '../regions/regions',
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},

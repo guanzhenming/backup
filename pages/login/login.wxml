@@ -1,12 +1,12 @@
 <!--pages/login/login.wxml-->
 <form bindsubmit='selectRegion'>
     <label class="lables">用户名/邮箱/手机号</label>
-    <input id='user' class="inputs"  name="accountInput" />  
+    <input id="user" class="inputs"  name="accountInput" />  
 
       <label class="lables">密码</label>  
-      <input id='pwd' class="inputs" password="true" name="passwordInput" />  
+      <input id="pw" class="inputs" password="true" type="text" name="passwordInput" bindinput=''/>  
 
-      <button class="loginBtn" from-type='submit'>登录</button>  
+      <button class="loginBtn" form-type='submit'>登录</button>  
       </form>
       <view class="center">
       <label class="loginLab">IAM用户登录</label>

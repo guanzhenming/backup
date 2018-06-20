@@ -1,33 +1,66 @@
 // pages/regions/regions.js
 Page({
-  onClickHuabei: function () {
-    wx.setStorageSync('region_id', 'cn-north-1')
+  gotoLogin: function() {
     wx.navigateTo({
       url: '../login/login',
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },
     })
+  },
+
+  gotoEcs: function () {
+    wx.navigateTo({
+      url: '../ecs/ecs',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+
+  onClickHuabei: function () {
+    wx.setStorageSync('region_id', 'cn-north-1')
+    wx.setStorageSync('region_name','华北-北京1')
+    if(token) {
+      this.gotoEcs()
+    } else {
+      var globalToken = wx.getStorageSync('global-token')
+      if (globalToken) {
+        login.getProjIdByToken(globalToken)
+      } else {
+        thisl.gotoLogin()
+      }
+    }
 
   },
   onClickHuadong: function () {
     wx.setStorageSync('region_id', 'cn-east-2')
-    wx.navigateTo({
-      url: '../login/login',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
+    wx.setStorageSync('region_name', '华东-上海2')
+    if (token) {
+      this.gotoEcs()
+    } else {
+      var globalToken = wx.getStorageSync('global-token')
+      if (globalToken) {
+        login.getProjIdByToken(globalToken)
+      } else {
+        thisl.gotoLogin()
+      }
+    }
 
   },
   onClickHuabei: function () {
     wx.setStorageSync('region_id', 'cn-south-1')
-    wx.navigateTo({
-      url: '../login/login',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
+    wx.setStorageSync('region_name', '华南-广州')
+    if (token) {
+      this.gotoEcs()
+    } else {
+      var globalToken = wx.getStorageSync('global-token')
+      if (globalToken) {
+        login.getProjIdByToken(globalToken)
+      } else {
+        thisl.gotoLogin()
+      }
+    }
 
   },
   /**
@@ -102,3 +135,5 @@ Page({
   
   }
 })
+
+var login = require('../login/login.js');

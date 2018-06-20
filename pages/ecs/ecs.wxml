@@ -1,15 +1,17 @@
 <!--pages/ecs/ecs.wxml-->
-<view class="navi">
+<view class="navi" bindtap="onClickRegion">
   <image class="location" src="https://backup-app.obs.cn-north-1.myhwclouds.com/location.png"></image>
-  <label class='region'>华北-北京一</label>
+  <label class='region'>{{region_name}}</label>
 </view>
 <view wx:if="{{ecsselected}}">
   <view class="op">
-    <checkbox class="checkboxes"></checkbox>
-    <label class="names">全选 共计： 3台</label>
-    <button class='backup'>一键备份</button>
+    <checkbox-group bindchange="onActionAll">
+    <checkbox class="checkboxes" name="actionAll"></checkbox>
+    </checkbox-group>
+    <label class="names">全选 共计： {{currentEcsNum}}台</label>
+    <button class='backup' bindtap="onClickAction">一键备份</button>
   </view>
-
+  <checkbox-group bindchange="onActionSingle">
   <block class="tables" wx:for="{{listECS}}" wx:key="{{code}}">
     <view class="blocks">
       <checkbox class="checkboxes" value="{{item.name}}"></checkbox>
@@ -17,6 +19,7 @@
       <view class='infos'>{{item.diskSize}} {{item.ip}}</view>
     </view>
   </block>
+  </checkbox-group>
 </view>
 
 

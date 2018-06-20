@@ -1,17 +1,12 @@
 {
   "globalData": {
-    "regionInfo": {
-      "cn-north1": "华北-北京1",
-      "cn-east-2": "华东-上海2",
-      "cn-south-1": "华南-广州1"
-    }
+
     
   },
   "pages": [
     "pages/clouds/clouds",
     "pages/login/login",
     "pages/ecs/ecs",
-    "pages/backup/backup",
     "pages/regions/regions"
   ],
   "window": {
