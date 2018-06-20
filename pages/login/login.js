@@ -55,7 +55,7 @@ Page({
           var userId = res.data.token.user.id
           wx.setStorageSync('user-id',userId)
           wx.setStorageSync('auth-info',bodyData)
-          var getProId_url = "https://iam." + region_id + ".myhwclouds.com/v3/users/"+userId+"/projects";
+          var getProId_url = "https://iam." + regionId + ".myhwclouds.com/v3/users/"+userId+"/projects";
           wx.request({
             url: getProId_url,
             header: {
@@ -83,7 +83,7 @@ Page({
                 for(var i=0;i<res.data.projects.length;i++) {
                   if (res.data.projects[i].name == regionId) {
                     projId = res.data.projects[i].id
-                    wx.setStorageSync(regionId+'projId',projId)
+                    wx.setStorageSync(regionId+'-projId',projId)
                   }
                 }
                 var newBodyData = {
@@ -309,7 +309,7 @@ function getProjIdByToken(token) {
             } else {
               var token = JSON.stringify(res.header['X-Subject-Token']).replace(/\"/g, "");
               var regionId = wx.getStorageSync('region_id')
-              wx.setStorageSync(region_id + '-token', token)
+              wx.setStorageSync(regionId + '-token', token)
               wx.navigateTo({
                 url: '../ecs/ecs',
                 success: function (res) { },

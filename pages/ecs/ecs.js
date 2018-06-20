@@ -121,7 +121,7 @@ Page({
           }
           console.log('listWorking:'+JSON.stringify(listWorking))
           console.log('listBackup:' + JSON.stringify(listBackup))
-          this.setData({
+          that.setData({
             listBackups: listBackup,
             listWorking: listWorking,
             currentBackupNum: backupNum
@@ -129,7 +129,7 @@ Page({
         } 
       }
     })
-    that.setData({
+    this.setData({
       ecsselected: false
     })
   },
