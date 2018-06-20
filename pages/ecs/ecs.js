@@ -101,7 +101,7 @@ Page({
           var listWorking=[];
           for (var i=0;i<backupNum;i++) {
             var day = res.data.checkpoint_items[i].created_at.split('T')[0];
-            var hour = res.data.checkpoint_items[i].created_at.split('T')[1].split('.')
+            var hour = res.data.checkpoint_items[i].created_at.split('T')[1].split('.')[0]
             var h1 = hour.split(':')[0]
             var min = hour.split(':')[1]
             var sec = hour.split(':')[2]
@@ -126,7 +126,7 @@ Page({
             listWorking: listWorking,
             currentBackupNum: backupNum
           })
-        }
+        } 
       }
     })
     that.setData({

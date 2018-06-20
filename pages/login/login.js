@@ -242,7 +242,8 @@ function getProjIdByToken(token) {
   wx.request({
     url: getProId_url,
     header: {
-      "Content-Type": "application/json;charset=utf8"
+      "Content-Type": "application/json;charset=utf8",
+      "X-Auth-Token": token
     },
     method: 'GET',
     complete: function (res) {
@@ -264,7 +265,7 @@ function getProjIdByToken(token) {
         for (var i = 0; i < res.data.projects.length; i++) {
           if (res.data.projects[i].name == regionId) {
             projId = res.data.projects[i].id
-            wx.setStorageSync(regionId + 'projId', projId)
+            wx.setStorageSync(regionId + '-projId', projId)
           }
         }
         var bodyData = wx.getStorageSync('auth-info')
