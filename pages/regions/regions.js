@@ -10,9 +10,13 @@ Page({
   },
 
   gotoEcs: function () {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    });
     wx.navigateTo({
       url: '../ecs/ecs',
-      success: function (res) { },
+      success: function (res) {},
       fail: function (res) { },
       complete: function (res) { },
     })

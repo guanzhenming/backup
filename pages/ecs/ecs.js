@@ -81,6 +81,10 @@ Page({
     })
   },
   onBackup: function () {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    });
     var regionId = wx.getStorageSync('region_id');
     var token = wx.getStorageSync(regionId + '-token');
     var projId = wx.getStorageSync(regionId + '-projId');
@@ -126,6 +130,7 @@ Page({
             listWorking: listWorking,
             currentBackupNum: backupNum
           })
+          wx.hideToast();
         } 
       }
     })
@@ -168,6 +173,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    });
     var regionId = wx.getStorageSync('region_id');
     var token = wx.getStorageSync(regionId + '-token');
     var projId = wx.getStorageSync(regionId + '-projId');
@@ -210,6 +219,7 @@ Page({
             listECS: listECS,
             currentEcsNum: ecsNum
           })
+          wx.hideToast();
          
         }
       }
