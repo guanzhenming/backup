@@ -67,11 +67,10 @@ color: #34475F;
 letter-spacing: 0;
 }
 .backup{
-  width: 86px;
-  height: 30pt;
+  width: 100px;
+  height: 26pt;
   margin-right: 30px;
 background: rgba(245,111,105,0.60);
-border-radius: 100px;
 float: right;
 font-size: 14px;
 font-family: PingFangSC-Regular;
