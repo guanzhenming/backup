@@ -1,4 +1,5 @@
 // pages/regions/regions.js
+
 Page({
   gotoLogin: function() {
     wx.navigateTo({
@@ -23,6 +24,9 @@ Page({
   },
 
   onClickHuabei: function () {
+    this.setData({
+      selectRegion: "hb"
+    })
     wx.setStorageSync('region_id', 'cn-north-1')
     wx.setStorageSync('region_name','华北-北京1')
     var token = wx.getStorageSync('cn-north-1-token')
@@ -39,6 +43,9 @@ Page({
 
   },
   onClickHuadong: function () {
+    this.setData({
+      selectRegion: "hd"
+    })
     wx.setStorageSync('region_id', 'cn-east-2')
     wx.setStorageSync('region_name', '华东-上海2')
     var token = wx.getStorageSync('cn-east-2-token')
@@ -55,6 +62,9 @@ Page({
 
   },
   onClickHuanan: function () {
+    this.setData({
+      selectRegion: "hn"
+    })
     wx.setStorageSync('region_id', 'cn-south-1')
     wx.setStorageSync('region_name', '华南-广州')
     var token = wx.getStorageSync('cn-south-1-token')
@@ -74,7 +84,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    selectRegion: ""
   },
 
   /**

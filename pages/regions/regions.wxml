@@ -4,17 +4,17 @@
 
 <label class="texts bj">华北-北京一</label>
 <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/beijing.png" ></image>
-<image class="regionselect" wx:if="{{true}}" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
+<image class="regionselect" wx:if="{{selectRegion=='hb'}}" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
 </button>
 <button class="buttons sh" bindtap="onClickHuadong">
 <label class="texts">华东-上海二</label>
 <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/shanghai.png"></image>
-<image class="regionselect" wx:if="{{false}}" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
+<image class="regionselect" wx:if="{{selectRegion=='hd'}}" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
 </button>
 
 <button class="buttons gz" bindtap="onClickHuanan">
 <label class="texts">华南-广州</label>
 <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/gz.png"></image>
-<image class="regionselect" wx:if="{{false}}" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
+<image class="regionselect" style='margin-left:53px' wx:if="{{selectRegion=='hn'}}" src="https://backup-app.obs.cn-north-1.myhwclouds.com/regionselect.png"></image>
 </button>
 </view>
