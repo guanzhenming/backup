@@ -104,19 +104,26 @@ Page({
           var ecsNum = res.data.servers.length;
           var listECS = [];
           for (var i = 0; i < ecsNum; i++) {
-            var vpcId = res.data.metadata && res.data.metadata.vpc_id;
+            var d = res.data.servers[i]
+            var vpcId = d.metadata && d.metadata.vpc_id;
             var ecsIp;
-            if (res.data.addresses) {
-              ecsIp = _.first(_.first(_.values(res.data.addresses))) && _.first(_.first(_.values(res.data.addresses))).addr || '--';
+            if (d.addresses) {
+              for(var item in d.addresses) {
+                if (d.addresses[item][0].hasOwnProperty("addr")) {
+                  ecsIp = d.addresses[item][0].addr
+                } else {
+                  ecsIp = '--'
+                }
+              }
             }
-            if (res.data["addresses"] && res.data["addresses"][vpcId] && res.data["addresses"][vpcId].length) {
-              ecsIp = res.data["addresses"][vpcId][0]["addr"]
+            if (d["addresses"] && d["addresses"][vpcId] && d["addresses"][vpcId].length) {
+              ecsIp = d["addresses"][vpcId][0]["addr"]
             }
             var ecs = {
-              name: res.data.servers[i].name,
+              name: d.name,
               diskSize: '40G',
               ip: ecsIp,
-              id: res.data.servers[i].id
+              id: d.id
             }
             listECS.push(ecs);
           }
@@ -152,7 +159,7 @@ Page({
     var regionId = wx.getStorageSync('region_id');
     var token = wx.getStorageSync(regionId + '-token');
     var projId = wx.getStorageSync(regionId + '-projId');
-    var getBackup_url = "https://csbs." + regionId + ".myhwclouds.com/" + "v1/" + projId + "/checkpoint_items?limit=5";
+    var getBackup_url = "https://csbs." + regionId + ".myhwclouds.com/" + "v1/" + projId + "/checkpoint_items?limit=10";
     var that = this;
     wx.request({
       url: getBackup_url,
@@ -209,7 +216,7 @@ Page({
     var regionId = wx.getStorageSync('region_id');
     var token = wx.getStorageSync(regionId + '-token');
     var projId = wx.getStorageSync(regionId + '-projId');
-    var getBackup_url = "https://csbs." + regionId + ".myhwclouds.com/" + "v1/" + projId + "/checkpoint_items?" + "offset=" + this.data.currentBackupNum+"limit=5";
+    var getBackup_url = "https://csbs." + regionId + ".myhwclouds.com/" + "v1/" + projId + "/checkpoint_items?" + "offset=" + this.data.currentBackupNum+"&"+"limit=5";
     var that = this;
     wx.request({
       url: getBackup_url,
@@ -293,7 +300,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.onClickECS();
 
   },
 
@@ -331,7 +338,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    this.getMoreBackup()
   },
 
   /**

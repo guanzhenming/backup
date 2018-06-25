@@ -5,7 +5,9 @@
 </view>
 <view wx:if="{{ecsselected}}">
   <view class="op">
-    <checkbox class="checkboxes" name="actionAll" bindchange="onActionAll"></checkbox>
+    <checkbox-group bindchange="onActionAll">
+    <checkbox class="checkboxes" name="actionAll" ></checkbox>
+    </checkbox-group>
     <label class="names">全选 共计： {{currentEcsNum}}台</label>
     <button class='backup' bindtap="onClickAction">一键备份</button>
   </view>
