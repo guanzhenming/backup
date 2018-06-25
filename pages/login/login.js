@@ -38,16 +38,10 @@ Page({
       data: JSON.stringify(bodyData),
       complete: function (res) {
         if(res.statusCode != 201) {
-          wx.showModal({
-            title: '提示',
-            content: '认证失败',
-            showCancel: false,
-            success: function(res) {
-              if (res.confirm) {
-                console.log('用户点击确定')
-              }
-            }
-
+          wx.showToast({
+            title: '认证失败',
+            icon: 'success',
+            duration: 3000
           })
         } else {
           var token = JSON.stringify(res.header['X-Subject-Token']).replace(/\"/g,"");
@@ -66,17 +60,12 @@ Page({
             data: JSON.stringify(bodyData),
             complete: function (res) {
               if (res.statusCode != 200) {
-                wx.showModal({
-                  title: '提示',
-                  content: '获取项目信息失败',
-                  showCancel: false,
-                  success: function (res) {
-                    if (res.confirm) {
-                      console.log('用户点击确定')
-                    }
-                  }
-
+                wx.showToast({
+                  title: '获取项目信息失败',
+                  icon: 'success',
+                  duration: 3000
                 })
+                
               } else {
                 var projId
                 regionId = wx.getStorageSync('region_id')
@@ -106,16 +95,10 @@ Page({
                   data: JSON.stringify(newBodyData),
                   complete: function (res) {
                     if (res.statusCode != 201) {
-                      wx.showModal({
-                        title: '提示',
-                        content: '认证失败',
-                        showCancel: false,
-                        success: function (res) {
-                          if (res.confirm) {
-                            console.log('用户点击确定')
-                          }
-                        }
-
+                      wx.showToast({
+                        title: '认证失败',
+                        icon: 'success',
+                        duration: 3000
                       })
                     } else {
                       var token = JSON.stringify(res.header['X-Subject-Token']).replace(/\"/g, "");
@@ -248,17 +231,12 @@ function getProjIdByToken(token) {
     method: 'GET',
     complete: function (res) {
       if (res.statusCode != 200) {
-        wx.showModal({
-          title: '提示',
-          content: '获取项目信息失败',
-          showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-            }
-          }
-
+        wx.showToast({
+          title: '获取项目信息失败',
+          icon: 'success',
+          duration: 3000
         })
+        
       } else {
         var projId
         regionId = wx.getStorageSync('region_id')
@@ -289,23 +267,20 @@ function getProjIdByToken(token) {
           data: JSON.stringify(newBodyData),
           complete: function (res) {
             if (res.statusCode != 201) {
-              wx.showModal({
-                title: '提示',
-                content: '认证失败',
-                showCancel: false,
-                success: function (res) {
-                  if (res.confirm) {
-                    console.log('用户点击确定')
-                    wx.navigateTo({
-                      url: '../login/login',
-                      success: function (res) { },
-                      fail: function (res) { },
-                      complete: function (res) { }
-                    })
-                  }
+              wx.showToast({
+                title: '认证失败',
+                icon: 'success',
+                duration: 3000,
+                complete: function(res) {
+                  wx.navigateTo({
+                    url: '../login/login',
+                    success: function (res) { },
+                    fail: function (res) { },
+                    complete: function (res) { }
+                  })
                 }
-
               })
+              
             } else {
               var token = JSON.stringify(res.header['X-Subject-Token']).replace(/\"/g, "");
               var regionId = wx.getStorageSync('region_id')

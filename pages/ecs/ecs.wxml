@@ -43,7 +43,7 @@
   </block>
 </view>
 
-<view class="switch left" bindtap='onECS'>
+<view class="switch left" bindtap='onClickECS'>
   <view>
     <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/{{ecsselected ? 'ecsselect' : 'ecs'}}.png"></image>
   </view>
@@ -52,7 +52,7 @@
 
 
 </view>
-<view class="switch right" bindtap='onBackup'>
+<view class="switch right" bindtap='onClickBackup'>
   <view>
     <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/{{ecsselected ? 'backup':'backupselected'}}.png"></image>
   </view>
