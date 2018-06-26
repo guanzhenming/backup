@@ -31,6 +31,7 @@ letter-spacing: 0;
 margin-left: 36px;
 }
 .navi{
+  position: fixed;
   height: 20pt;
   width: 100%;
   padding-top: 5pt;
@@ -52,6 +53,7 @@ color: #22263F;
 text-align: center;
 }
 .op{
+  position: fixed;
   height: 30pt;
   width: 100%;
   padding-top: 10pt;
@@ -78,7 +80,7 @@ color: #FFFFFF;
 text-align: center;
 }
 .switch{
-  position: absolute;
+  position: fixed;
   display: inline-block;
   bottom: 0;
   width: 50%;
