@@ -14,7 +14,8 @@
     "navigationBarBackgroundColor": "#fbf9fe",
     "navigationBarTitleText": "云服务器备份",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#fbf9fe"
+    "backgroundColor": "#fbf9fe",
+    "enablePullDownRefresh": true
   },
   "networkTimeout": {
     "request": 10000,

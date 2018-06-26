@@ -5,7 +5,9 @@
 </view>
 <view wx:if="{{ecsselected}}">
   <view class="op">
-    <checkbox class="checkboxes" name="actionAll" bindchange="onActionAll"></checkbox>
+    <checkbox-group bindchange="onActionAll">
+    <checkbox class="checkboxes" name="actionAll" ></checkbox>
+    </checkbox-group>
     <label class="names">全选 共计： {{currentEcsNum}}台</label>
     <button class='backup' bindtap="onClickAction">一键备份</button>
   </view>
@@ -43,7 +45,7 @@
   </block>
 </view>
 
-<view class="switch left" bindtap='onECS'>
+<view class="switch left" bindtap='onClickECS'>
   <view>
     <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/{{ecsselected ? 'ecsselect' : 'ecs'}}.png"></image>
   </view>
@@ -52,7 +54,7 @@
 
 
 </view>
-<view class="switch right" bindtap='onBackup'>
+<view class="switch right" bindtap='onClickBackup'>
   <view>
     <image class="images" src="https://backup-app.obs.cn-north-1.myhwclouds.com/{{ecsselected ? 'backup':'backupselected'}}.png"></image>
   </view>

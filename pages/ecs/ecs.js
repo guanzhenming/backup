@@ -38,6 +38,11 @@ Page({
           }
         })
       }
+      wx.showToast({
+        title: '下发命令成功',
+        icon: 'success',
+        duration: 3000
+      })
 
     
   },
@@ -66,11 +71,71 @@ Page({
       })
     }
   },
-  onECS:function(){
+  onClickECS:function(){
     this.setData({
       ecsselected : true
     })
-    
+    this.getEcs()
+  },
+  getEcs: function() {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    });
+    var regionId = wx.getStorageSync('region_id');
+    var token = wx.getStorageSync(regionId + '-token');
+    var projId = wx.getStorageSync(regionId + '-projId');
+    var region_name = wx.getStorageSync('region_name');
+    this.setData({
+      region_name: region_name
+    })
+    var getEcs_url = "https://ecs." + regionId + ".myhwclouds.com/" + "v2/" + projId + "/servers/detail?limit=5";
+    var that = this;
+    wx.request({
+      url: getEcs_url,
+      header: {
+        "Content-type": "application/json;charset=utf8",
+        "X-Auth-Token": token
+      },
+      method: "GET",
+      complete: function (res) {
+        console.log('ecs  list is:' + JSON.stringify(res))
+        if (res.statusCode == 200) {
+          var ecsNum = res.data.servers.length;
+          var listECS = [];
+          for (var i = 0; i < ecsNum; i++) {
+            var d = res.data.servers[i]
+            var vpcId = d.metadata && d.metadata.vpc_id;
+            var ecsIp;
+            if (d.addresses) {
+              for(var item in d.addresses) {
+                if (d.addresses[item][0].hasOwnProperty("addr")) {
+                  ecsIp = d.addresses[item][0].addr
+                } else {
+                  ecsIp = '--'
+                }
+              }
+            }
+            if (d["addresses"] && d["addresses"][vpcId] && d["addresses"][vpcId].length) {
+              ecsIp = d["addresses"][vpcId][0]["addr"]
+            }
+            var ecs = {
+              name: d.name,
+              diskSize: '40G',
+              ip: ecsIp,
+              id: d.id
+            }
+            listECS.push(ecs);
+          }
+          that.setData({
+            listECS: listECS,
+            currentEcsNum: ecsNum
+          })
+          wx.hideToast();
+
+        }
+      }
+    })
   },
   onClickRegion: function() {
     wx.navigateTo({
@@ -80,7 +145,13 @@ Page({
       complete: function (res) { },
     })
   },
-  onBackup: function () {
+  onClickBackup: function() {
+    this.setData({
+      ecsselected: false
+    })
+    this.getBackup()
+  },
+  getBackup: function () {
     wx.showToast({
       title: '加载中',
       icon: 'loading'
@@ -88,7 +159,7 @@ Page({
     var regionId = wx.getStorageSync('region_id');
     var token = wx.getStorageSync(regionId + '-token');
     var projId = wx.getStorageSync(regionId + '-projId');
-    var getBackup_url = "https://csbs." + regionId + ".myhwclouds.com/" + "v1/" + projId + "/checkpoint_items?limit=5";
+    var getBackup_url = "https://csbs." + regionId + ".myhwclouds.com/" + "v1/" + projId + "/checkpoint_items?limit=10";
     var that = this;
     wx.request({
       url: getBackup_url,
@@ -134,9 +205,65 @@ Page({
         } 
       }
     })
-    this.setData({
-      ecsselected: false
+    
+  },
+
+  getMoreBackup: function () {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    });
+    var regionId = wx.getStorageSync('region_id');
+    var token = wx.getStorageSync(regionId + '-token');
+    var projId = wx.getStorageSync(regionId + '-projId');
+    var getBackup_url = "https://csbs." + regionId + ".myhwclouds.com/" + "v1/" + projId + "/checkpoint_items?" + "offset=" + this.data.currentBackupNum+"&"+"limit=5";
+    var that = this;
+    wx.request({
+      url: getBackup_url,
+      header: {
+        "Content-type": "application/json;charset=utf8",
+        "X-Auth-Token": token
+      },
+      method: "GET",
+      complete: function (res) {
+        console.log('backup  list is:' + JSON.stringify(res))
+        if (res.statusCode == 200) {
+          var backupNum = res.data.checkpoint_items.length;
+          var listBackup = that.data.listBackups;
+          var listWorking = that.data.listWorking;
+          for (var i = 0; i < backupNum; i++) {
+            var day = res.data.checkpoint_items[i].created_at.split('T')[0];
+            var hour = res.data.checkpoint_items[i].created_at.split('T')[1].split('.')[0]
+            var h1 = hour.split(':')[0]
+            var min = hour.split(':')[1]
+            var sec = hour.split(':')[2]
+            var h2 = Number(h1) + 8
+            var time = day + ' ' + h2 + ':' + min + ':' + sec;
+            var back = {
+              name: res.data.checkpoint_items[i].name,
+              ecs: res.data.checkpoint_items[i].extend_info.resource_name,
+              time: time,
+              p: res.data.checkpoint_items[i].extend_info.progress
+            }
+            if (back.p == 100) {
+              listBackup.push(back)
+            } else {
+              listWorking.push(back)
+            }
+          }
+          console.log('listWorking:' + JSON.stringify(listWorking))
+          console.log('listBackup:' + JSON.stringify(listBackup))
+          var curBackupNum = backupNum + that.data.currentBackupNum
+          that.setData({
+            listBackups: listBackup,
+            listWorking: listWorking,
+            currentBackupNum: curBackupNum
+          })
+          wx.hideToast();
+        }
+      }
     })
+
   },
 
 
@@ -173,57 +300,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading'
-    });
-    var regionId = wx.getStorageSync('region_id');
-    var token = wx.getStorageSync(regionId + '-token');
-    var projId = wx.getStorageSync(regionId + '-projId');
-    var region_name = wx.getStorageSync('region_name');
-    this.setData({
-      region_name: region_name
-    })
-    var getEcs_url  = "https://ecs." + regionId + ".myhwclouds.com/" + "v2/" + projId + "/servers/detail?limit=5";
-    var that = this;
-    wx.request({
-      url: getEcs_url,
-      header: {
-        "Content-type": "application/json;charset=utf8",
-        "X-Auth-Token": token
-      },
-      method: "GET",
-      complete: function (res) {
-        console.log('ecs  list is:' + JSON.stringify(res))
-        if (res.statusCode == 200) {
-          var ecsNum = res.data.servers.length;
-          var listECS = [];
-          for(var i=0;i<ecsNum;i++) {
-            var vpcId = res.data.metadata && res.data.metadata.vpc_id;
-            var ecsIp;
-            if (res.data.addresses) {
-            ecsIp = _.first(_.first(_.values(res.data.addresses))) && _.first(_.first(_.values(res.data.addresses))).addr || '--';
-            }
-            if (res.data["addresses"] && res.data["addresses"][vpcId] && res.data["addresses"][vpcId].length) {
-              ecsIp = res.data["addresses"][vpcId][0]["addr"]
-            }
-            var ecs = {
-              name: res.data.servers[i].name,
-              diskSize: '40G',
-              ip: ecsIp,
-              id: res.data.servers[i].id
-            }
-            listECS.push(ecs);
-          }
-          that.setData({
-            listECS: listECS,
-            currentEcsNum: ecsNum
-          })
-          wx.hideToast();
-         
-        }
-      }
-    })
+    this.onClickECS();
 
   },
 
@@ -245,6 +322,15 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    if (this.data.ecsselected == true) {
+      this.getBackup()
+    } else {
+      this.getBackup()
+    }
+
+    setTimeout(function() {
+      wx.stopPullDownRefresh()
+    },2000)
   
   },
 
@@ -252,7 +338,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    this.getMoreBackup()
   },
 
   /**
